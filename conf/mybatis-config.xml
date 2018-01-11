@@ -20,6 +20,7 @@
       <!-- 显示指定每个我们需要更改的配置的值 -->
       <setting name="lazyLoadingEnabled" value="true"/>
       <setting name="aggressiveLazyLoading" value="false"/>
+      <setting name="cacheEnabled" value="true"/>
   </settings>
  <!-- 3、typeAliases：别名处理器：可以为我们的java类型起别名 
 			别名不区分大小写

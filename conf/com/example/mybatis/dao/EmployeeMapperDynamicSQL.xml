@@ -199,7 +199,14 @@
                 </if>
              </if>
          </select>
-         
+         <!-- 
+	  		抽取可重用的sql片段。方便后面引用 
+	  		1、sql抽取：经常将要查询的列名，或者插入用的列名抽取出来方便引用
+	  		2、include来引用已经抽取的sql：
+	  		3、include还可以自定义一些property，sql标签内部就能使用自定义的属性
+	  			include-property：取值的正确方式${prop},
+	  			#{不能使用这种方式}
+	 		 -->
          <sql id="insertColumn">
             <if test="_databaseId=='mysql'"></if>
               employee_id,last_name,email
