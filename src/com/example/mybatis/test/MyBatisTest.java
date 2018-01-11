@@ -235,4 +235,11 @@ public class MyBatisTest {
 		mapper.addEmps(emps);
 	    //session.commit();
 	}
+	@Test
+	public void testinnerParameter() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		Employee employee=new Employee(null, "Smith", "smith@163.com", "1",new Department(1));
+		List<Employee> emps =mapper.getEmpsTestInnerParameter(employee);
+		//session.commit();
+	}
 }
