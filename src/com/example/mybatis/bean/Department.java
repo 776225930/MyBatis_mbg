@@ -29,5 +29,13 @@ public class Department {
 	public void setEmps(List<Employee> emps) {
 		this.emps = emps;
 	}
+	public Department() {
+		super();
+	}
+	public Department(Integer id) {
+		super();
+		this.id = id;
+	}
+	
 	
 }

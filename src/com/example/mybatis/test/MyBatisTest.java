@@ -2,6 +2,8 @@ package com.example.mybatis.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,5 +205,34 @@ public class MyBatisTest {
 		Employee employee=new Employee(null, "%e%",null, null);
 		List<Employee> emps= mapper.getEmpsByComditionTrim(employee);
 		System.out.println(emps);
+	}
+	@Test
+	public void testGetEmpsByComditionChoose() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		Employee employee=new Employee(null, null,null,null);
+		List<Employee> emps= mapper.getEmpsByComditionChoose(employee);
+		System.out.println(emps);
+	}
+	@Test
+	public void testUpdateEmp() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		Employee employee=new Employee(5, "TT","tt@163.com",null);
+		mapper.updateEmp(employee);
+		session.commit();
+	}
+	@Test
+	public void testGetEmpsByComditionForeach() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		List<Employee> emps = mapper.getEmpsByComditionForeach(Arrays.asList(1,2,3,4));
+		System.out.println(emps);
+	}
+	@Test
+	public void testBatchSave() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		List<Employee> emps =new ArrayList<>();
+		emps.add(new Employee(null, "Smith", "smith@163.com", "1",new Department(1)));
+		emps.add(new Employee(null, "Allen", "allen@163.com", "1",new Department(2)));
+		mapper.addEmps(emps);
+	    //session.commit();
 	}
 }
