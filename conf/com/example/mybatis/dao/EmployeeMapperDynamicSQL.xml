@@ -12,8 +12,8 @@
    <!-- public List<Employee> getEmpsByComditionIf(Employee employee); -->
     <select id="getEmpsByComditionIf" resultType="com.example.mybatis.bean.Employee">
          select * from tbl_employee  
-         where 
          <!-- test:判断表达式(OGNL)  遇见特殊符号写转义字符 -->
+         <where>
          <if test="id!=null">
               id=#{id}
          </if>
@@ -27,6 +27,35 @@
           <if test="gender==0 or gender==1">
           and gender=#{gender}
           </if>
-          
+          </where>
     </select>
+    
+    <!-- 自定义字符串的截取规则 -->
+    <!-- public List<Employee> getEmpsByComditionTrim(Employee employee); -->
+     <select id="getEmpsByComditionTrim" resultType="com.example.mybatis.bean.Employee">
+      select * from tbl_employee 
+      where 
+      <!-- 最后多出的and或者or where标签不能解决 
+       prefix:前缀:trim标签体中是整个字符串拼串后的结果,
+        prefix给拼串后的结果加一个前缀 
+       prefixOverrides:前缀覆盖:去掉整个字符串前面多余的字符  
+       suffix  
+       suffixOverrides -->
+      <trim suffixOverrides="and">
+         <if test="id!=null">
+              id=#{id} and
+         </if>
+         <if test="lastName!=null and lastName!=''">
+           last_name like #{lastName} and
+         </if>
+          <if test="email!=null and email.trim()!=&quot;&quot;">
+           email=#{email} and
+          </if>
+          <!-- OGNL会进行字符串与数字类型转换 -->
+          <if test="gender==0 or gender==1">
+          and gender=#{gender}
+          </if>
+      </trim>
+     </select>
+    
   </mapper>

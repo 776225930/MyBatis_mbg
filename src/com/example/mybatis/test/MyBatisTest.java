@@ -190,10 +190,18 @@ public class MyBatisTest {
 	@Test
 	public void testGetEmpsByComditionIf() {
 		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
-		Employee employee=new Employee(3, "%e%",null, null);
+		Employee employee=new Employee(null, "%e%",null, null);
 		List<Employee> emps= mapper.getEmpsByComditionIf(employee);
 		System.out.println(emps);
 	}
 	//查询时如果某些条件没有没带，sql语句可能会拼错
-	//1.给where后面加上1=1
+	//1.给where后面加上1=1,以后的条件都是and xxx
+	//2.使用<where>将查询条件包括在里边
+	@Test
+	public void testGetEmpsByComditionTrim() {
+		EmployeeMapperDynamicSQL mapper = session.getMapper(EmployeeMapperDynamicSQL.class);
+		Employee employee=new Employee(null, "%e%",null, null);
+		List<Employee> emps= mapper.getEmpsByComditionTrim(employee);
+		System.out.println(emps);
+	}
 }
